@@ -28,7 +28,7 @@ def process_csv_task(self, job_id: str, file_path: str):
         total_rows = 0
         with open(file_path, "r", encoding="utf-8") as f:
             reader = csv.reader(f)
-            # skip header row
+            
             header = next(reader, None)
             for _ in reader:
                 total_rows += 1
@@ -93,9 +93,6 @@ def _flush_batch(db: Session, batch: list[dict]):
     if not batch:
         return
 
-    # ✅ Deduplicate by SKU inside this batch
-    # If the same SKU appears multiple times in this batch,
-    # the LAST row wins (overwrite previous for that SKU).
     by_sku: dict[str, dict] = {}
     for item in batch:
         sku = item["sku"]
