@@ -47,37 +47,39 @@ User Uploads CSV → Saved → Celery Worker Processes → DB Upserts → Webhoo
 
 ---
 
-## 📁 Project Structure
+### 📁 Project Structure
 
+```txt
 acme-product-importer/
 │
 ├── app/
-│ ├── main.py # FastAPI app entrypoint
-│ ├── models.py # SQLAlchemy models
-│ ├── database.py # DB connection/session
-│ ├── crud.py # DB helpers
-│ ├── celery_app.py # Celery config
-│ ├── schemas.py # Pydantic schemas
-│ ├── routers/
-│ │ ├── upload.py # CSV upload + progress API
-│ │ ├── products.py # Product list/filter/delete API
-│ │ └── webhooks.py # Webhook management API
-│ └── services/
-│ ├── csv_importer.py # CSV parsing + SKU upsert logic
-│ └── webhook_sender.py # Sends webhook POST requests
+│   ├── main.py                 # FastAPI app entrypoint
+│   ├── models.py               # SQLAlchemy models
+│   ├── database.py             # DB connection/session
+│   ├── crud.py                 # DB helpers
+│   ├── celery_app.py           # Celery config
+│   ├── schemas.py              # Pydantic schemas
+│   ├── routers/
+│   │   ├── upload.py           # CSV upload + progress API
+│   │   ├── products.py         # Product list/filter/delete API
+│   │   └── webhooks.py         # Webhook management API
+│   └── services/
+│       ├── csv_importer.py     # CSV parsing + SKU upsert logic
+│       └── webhook_sender.py   # Sends webhook POST requests
 │
 ├── static/
-│ ├── index.html # Upload UI + progress
-│ ├── products.html # Product table + SKU filter
-│ └── webhooks.html # Webhook registration UI
+│   ├── index.html              # Upload UI + progress
+│   ├── products.html           # Product table + SKU filter
+│   └── webhooks.html           # Webhook registration UI
 │
-├── uploads/ # Temp storage for uploaded CSVs
+├── uploads/                    # Temp storage for uploaded CSVs
 │
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt
 ├── .env.example
 └── README.md
+```
 
 ---
 
