@@ -1,53 +1,58 @@
-# Acme Product Importer
+# 📦 Acme Product Importer
 
-This project is a complete solution for the Acme CSV product import assignment.
+A complete end-to-end solution for the **Acme CSV product import assignment**.
 
-It allows users to:
+---
 
-- Upload large CSV files containing product data
-- Process the import asynchronously (no UI blocking)
-- Track import progress live
-- View & filter imported products
-- Delete all products when needed
-- Trigger webhook notifications once an import completes
+## 🎯 What This App Does
 
-The entire system runs using **Docker Compose**, so no local setup is required besides Docker.
+✔ Upload large CSV files  
+✔ Process import in background using Celery  
+✔ Track real-time progress  
+✔ Store products in PostgreSQL  
+✔ Upsert by SKU (update if exists, insert if new)  
+✔ View & filter products from UI  
+✔ Delete all data with one click  
+✔ Trigger webhook notification after import completes  
+
+All components run together using **Docker Compose** — no manual Python setup required.
 
 ---
 
 ## 🚀 Features
 
-| Feature | Implemented |
-|--------|:-----------:|
+| Feature | Status |
+|--------|--------|
 | CSV Upload | ✅ |
-| Asynchronous Processing (Celery) | ✅ |
-| Progress Polling UI | ✅ |
+| Background Processing (Celery) | ✅ |
+| Progress Polling | ✅ |
 | PostgreSQL Storage | ✅ |
 | SKU-Based Upsert | ✅ |
-| Webhooks (Event Triggered on Completion) | ✅ |
-| Product Listing + Search | ✅ |
+| Webhook Triggers | ✅ |
+| UI Filtering/Search | ✅ |
 | Bulk Delete Products | ✅ |
 
 ---
 
 ## 🏗️ System Architecture
 
-The application uses the following stack:
+| Component | Purpose |
+|----------|---------|
+| **FastAPI** | REST API + UI rendering |
+| **PostgreSQL** | Product storage |
+| **SQLAlchemy** | ORM & DB access |
+| **Redis** | Celery broker |
+| **Celery Worker** | Async CSV import + webhook |
+| **Docker Compose** | Full environment automation |
+| **Bootstrap + JS** | Frontend UI |
 
-- **FastAPI** → Serves API and frontend pages
-- **PostgreSQL** → Stores product data
-- **SQLAlchemy ORM** → Models, queries, migrations-ready
-- **Redis + Celery** → Background task processing (CSV import + webhooks)
-- **Docker Compose** → One command environment setup
-- **Bootstrap + Vanilla JavaScript** → Frontend UI
+**Flow:**
 
-Workflow overview:
-
-User Uploads CSV → Saved → Celery Worker Processes → DB Upserts → Webhooks Fired → UI Shows Progress
+> Upload CSV → Stored → Celery Processes → Upsert Products → Send Webhook → UI Shows Progress
 
 ---
 
-### 📁 Project Structure
+## 📁 Project Structure
 
 ```txt
 acme-product-importer/
@@ -72,7 +77,7 @@ acme-product-importer/
 │   ├── products.html           # Product table + SKU filter
 │   └── webhooks.html           # Webhook registration UI
 │
-├── uploads/                    # Temp storage for uploaded CSVs
+├── uploads/                    # Temp CSV storage
 │
 ├── Dockerfile
 ├── docker-compose.yml
@@ -83,41 +88,49 @@ acme-product-importer/
 
 ---
 
-## ⚙️ Installation & Running
+## ⚙️ Installation & Run
 
 ### 1️⃣ Prerequisites
 
-- Docker Desktop or Docker Engine
+- Docker Desktop (Windows/Mac)  
+- OR Docker Engine (Linux)  
 
-No Python installation needed.
+> No Python installation required.
 
 ---
 
-### 2️⃣ Setup Environment
+### 2️⃣ Create Environment File
 
-Inside the project folder, run:
-
+```sh
 cp .env.example .env
+```
 
-### 3️⃣ Start Application
+---
+
+### 3️⃣ Start the System
+
+```sh
 docker-compose up --build
+```
 
-Once running, visit:
+After startup, open:
 
-👉 http://localhost:8000
+➡ http://localhost:8000
+
+---
 
 ## 📌 How to Use
 
-1. Open your browser and go to:
+1. Go to **Upload Page**
+2. Select a CSV and upload
+3. Watch progress bar update live
+4. Visit **Products Page** to view and filter data
+5. (Optional) Add webhook URL for notifications
+6. Use **Delete All** anytime to reset database
 
-   👉 http://localhost:8000
+---
 
-2. Click **"Upload CSV"** and select a CSV file.
+### 🏁 Done!
 
-3. The progress bar will show real-time import status.
+---
 
-4. Once complete, navigate to the **Products** page to view and filter imported items.
-
-5. (Optional) Register a webhook on the **Webhooks** page to be notified when future imports finish.
-
-6. You may delete all data anytime using the **Delete All** button on the Products page.
