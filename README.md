@@ -1,6 +1,6 @@
 # 📦 Acme Product Importer
 
-A complete end-to-end solution for the **Acme CSV product import assignment**.
+A complete end-to-end solution for the **Acme CSV product import assignment**. 
 
 ---
 
