@@ -13,7 +13,6 @@ celery = Celery(
 celery.conf.timezone = "UTC"
 celery.conf.result_expires = 3600
 
-# 🔴 IMPORTANT: tell Celery where to find tasks
 # Option 1: autodiscover the app.services package
 celery.autodiscover_tasks(["app.services"])
 
